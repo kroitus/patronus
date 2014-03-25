@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% autoescape false %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Expecto patronus">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/static/ico/favicon.png">
+
+    <title>Expect for a patron(beta) - Find yourself a patron, become a patron{% block title %}
+    {% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/main.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static/js/html5shiv.js"></script>
+      <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="container">
+
+      <div class="masthead">
+        {% if advert %}
+        <h3 class="text-muted">Expect for a Patron(beta) - {{ advert.owner_name }}
+        {% else %}
+        <h3 class="text-muted">Expect for a Patron(beta)
+        {% endif %}
+        </h3>
+        <ul class="nav nav-justified">
+          <li {% if page == 'index' %}class="active"{% endif %}><a href="/">Home</a></li>
+          <li {% if page == 'adlist' %}class="active"{% endif %}><a href="/adlist/">Ads for patronage</a></li>
+          <li {% if page == 'addnew' %}class="active"{% endif %}><a href="/add_new/">Add new...</a></li>
+          {% if user %}
+          <li {% if page == 'myads' %}class="active"{% endif %}><a href="/adlist/?my=true">My ads</a></li>
+          {% endif %}
+          <li {% if page == 'about' %}class="active"{% endif %}><a href="/about/">About</a></li>
+          <li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+        </ul>
+      </div>
+
+      {% block content %}
+      {% endblock %}
+
+      <!-- Site footer -->
+      <div class="footer">
+        <p>&copy; Kroitus 2013</p>
+      </div>
+    <hr>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/static/assets/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    {% block scripts %}
+    {% endblock %}
+  </body>
+</html>
+{% endautoescape %}

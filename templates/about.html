@@ -1,0 +1,33 @@
+{% extends "templates/base.html" %}
+
+    {% block content %}
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+      <h2>Some boring stuff about this project.</h2>
+      <div>
+      <p>This project is now in beta stage - there can be bugs and mistakes. Fix and improvements are made, but I am a single person, doing this for no pay, so there may be delays.</p>
+      <p>I am a developer, but not a designer, so page layout and style could and should be improved.</p>
+      <p>This project is intended to be free for use. Maybe some time in the future there will be some paid features, but not for now.</p>
+      <p>If you have suggestions about this project, or want to support me somehow, contact me. Use the form below:</p>
+      </div>
+      <form action="/contact/" method="post" enctype="multipart/form-data">
+        <div>
+          <h3>Your name:</h3>
+          <p><input type="text" name="name" class="form-control" value="" required></p>
+        </div>
+        <div>
+          <h3>Your email:</h3>
+          <p><input type="text" name="email" class="form-control" value="" required></p>
+        </div>
+        <div>
+          <h3>Text:</h3>
+          <p><textarea name="text" class="form-control" rows="5" cols="60" required></textarea></p>
+        </div>
+        <div><input type="submit" value="Send" class="btn btn-primary"></div>
+      </form>
+    </div>
+
+    {% endblock %}
+
+    {% block scripts %}
+    {% endblock %}

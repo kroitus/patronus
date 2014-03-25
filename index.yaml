@@ -1,0 +1,7 @@
+indexes:
+- kind: Advert
+  ancestor: yes
+  properties:
+  - name: is_closed
+  - name: added
+    direction: desc

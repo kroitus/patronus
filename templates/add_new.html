@@ -1,0 +1,90 @@
+{% extends "templates/base.html" %}
+
+    {% block title %} - add new{% endblock %}
+
+    {% block content %}
+      <!-- Jumbotron -->
+<!--
+      <div class="jumbotron">
+        <h1>Latest ads for patronage</h1>
+      </div>
+-->
+
+      <h1>Add new advert for patronage</h1>
+      <form action="/add_new/" method="post" enctype="multipart/form-data">
+        <div>
+          <h3>Your name:</h3>
+          <p><input type="text" name="owner_name" class="form-control" value="{{ ad_data.owner_name }}" required></p>
+        </div>
+        <div>
+          <h3>You want (raw text - no HTML):</h3>
+          <p><textarea name="must_be_done" class="form-control" rows="5" cols="60" required>{{ ad_data.must_be_done }}</textarea></p>
+        </div>
+        <div>
+          <h3>You are ready to do (raw text - no HTML):</h3>
+          <p><textarea name="will_be_given" class="form-control" rows="5" cols="60" required>{{ ad_data.will_be_given }}</textarea></p>
+        </div>
+        <div>
+          <h3>Your email (will not be visible publicly):</h3>
+          <p><input type="email" name="contact_email" class="form-control" value="{{ ad_data.contact_email }}"
+            data-validation-matches-match="email" 
+            data-validation-matches-message="Must match email address entered above" required>
+          </p>
+        </div>
+        <div>
+          <h3>Your phone:</h3>
+          <p><input type="text" name="contact_phone" class="form-control" value="{{ ad_data.contact_phone }}"></p>
+        </div>
+        <div>
+          <h3>Your website address:</h3>
+          <p><input type="text" name="contact_url" class="form-control" value="{{ ad_data.contact_url }}"></p>
+        </div>
+        <div>
+          <h3>Category of your patronage:</h3>
+          <p>
+            <select name="category" class="form-control">
+              <option value="-">Select category</option>
+              <option value="music" {% if ad_data.category == 'music' %}selected{% endif %}>Music</option>
+              <option value="acting" {% if ad_data.category == 'acting' %}selected{% endif %}>Acting</option>
+              <option value="painting" {% if ad_data.category == 'painting' %}selected{% endif %}>Painting</option>
+              <option value="writing" {% if ad_data.category == 'writing' %}selected{% endif %}>Writing</option>
+              <option value="other" {% if ad_data.category == 'other' %}selected{% endif %}>Other</option>
+            </select>
+          </p>
+        </div>
+        <div>
+          <h3>You are:</h3>
+          <p>
+            <select name="is_patron" class="form-control">
+              <option value="patron" {% if ad_data.is_patron == 'patron' %}selected{% endif %}>Patron</option>
+              <option value="artist" {% if ad_data.is_patron == 'artist' %}selected{% endif %}>Artist</option>
+            </select>
+          </p>
+        </div>
+        <div>
+          <h3>Additional image:</h3>
+          <p><input type="file" name="picture" size="40" class="form-control"></p>
+        </div>
+        <div>
+          <h3>This ad is:</h3>
+          <p>
+            <select name="is_closed" class="form-control">
+              <option value="active" {% if ad_data.is_patron == 'active' %}selected{% endif %}>Active</option>
+              <option value="closed" {% if ad_data.is_patron == 'closed' %}selected{% endif %}>Closed</option>
+            </select>
+          </p>
+        </div>
+        <div><input type="hidden" name="adid" value="{{ ad_data.adid }}"></div>
+        <div><input type="submit" value="Upload" class="btn btn-primary"></div>
+      </form>
+
+          {#<p><img src="/adimage/{{ advert.key.id() }}"></p>#}
+
+    {% endblock %}
+
+    {% block scripts %}
+    <script src="/static/js/jqBootstrapValidation.js"></script>
+    <script>
+      $(function () { $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(); } );
+    </script>
+    {% endblock %}

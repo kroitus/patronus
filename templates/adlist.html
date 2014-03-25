@@ -1,0 +1,44 @@
+{% extends "templates/base.html" %}
+
+  {% block title %} - latest ads{% endblock %}
+
+  {% block content %}
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+      <h3>Filter by category:</h3>
+      <form id="filter" method="GET">
+        <select name="category" id="category_selector">
+          <option value="-">All</option>
+          <option value="music" {% if category == 'music' %}selected{% endif %}>Music</option>
+          <option value="acting" {% if category == 'acting' %}selected{% endif %}>Acting</option>
+          <option value="painting" {% if category == 'painting' %}selected{% endif %}>Painting</option>
+          <option value="writing" {% if category == 'writing' %}selected{% endif %}>Writing</option>
+          <option value="other" {% if category == 'other' %}selected{% endif %}>Other</option>
+        </select>
+      </form>
+  </div>
+
+  <!-- Example row of columns -->
+  <div class="row">
+    {% for advert in adverts %}
+        <div class="col-lg-4">
+          <h2>{{ advert.owner_name }}</h2>
+          <p>{{ advert.must_be_done|striptags|truncate(length=50) }}</p>
+          <p><a class="btn btn-primary" href="/advert/{{ advert.key.id() }}">View details &raquo;</a></p>
+        </div>
+    {% endfor %}
+  </div>
+
+      {#<p><img src="/adimage/{{ advert.key.id() }}"></p>#}
+  {% endblock %}
+
+
+  {% block scripts %}
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('#category_selector').change( function() {
+          $('#filter').submit();
+      });
+    });
+  </script>
+  {% endblock %}

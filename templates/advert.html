@@ -1,0 +1,48 @@
+{% extends "templates/base.html" %}
+
+     {% block title %} - {{ advert.owner_name }}{% endblock %}
+
+    {% block content %}
+    <!-- Jumbotron -->
+    <div class="jumbotron">
+      <div>
+        {% if advert.is_patron %}
+        <h3>Patron:</h3>
+        {% else %}
+        <h3>Artist:</h3>
+        {% endif %}
+        <p>{{ advert.owner_name }}</p>
+      </div>
+
+      <div>
+        <h3>Searches for:</h3>
+        <p>{{ advert.must_be_done|escape|replace('\r\n','<br>') }}</p>
+      </div>
+
+      <div>
+        <h3>Willing to:</h3>
+        <p>{{ advert.will_be_given|escape|replace('\r\n','<br>') }}</p>
+      </div>
+
+      <div>
+        <h3>Webpage:</h3>
+        <p><a href="http://{{ advert.contact_url|safe }}" target="_blank">{{ advert.contact_url|safe }}</a></p>
+      </div>
+
+      {% if advert.image %}
+      <div>
+<!--
+        <h3>Image:</h3>
+-->
+        <p><img src="/adimage/{{ advert.key.id() }}"></p>
+      </div>
+      {% endif %}
+
+    {% if editable %}
+    <p><a class="btn btn-primary" href="/add_new/?adid={{ advert.key.id() }}">Edit</a></p>
+    {% endif %}
+    
+    <p><a class="btn btn-primary" href="/contact/{{ advert.key.id() }}">Contact</a></p>
+
+    </div>
+    {% endblock %}
